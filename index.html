@@ -40,6 +40,22 @@
       </div>
     </div>
   </header>
+  <hr class="border-[#E6E7E9] w-[80%] mx-auto">
+  <main class="mt-8 w-[80%] mx-auto">
+    <div class="available-jobs flex justify-between mb-6">
+      <h3 class="text-[#002C5C] font-semibold text-[20px]">Available Jobs</h3>
+      <div></div>
+      <p class="text-[#64748B] font-medium"><span id="count-jobs">0</span> jobs</p>
+    </div>
+
+    <div class=" grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+      <button onclick="toggleStyle('all-filter-btn')" id="all-filter-btn"
+        class="py-2.5 px-8 bg-[#3B82F6] text-[12px] text-white rounded-sm font-medium">All</button>
+      <button onclick="toggleStyle('interview-filter-btn')" id="interview-filter-btn"
+        class="py-2.5 px-8 bg-white text-[12px] text-[#64748B] rounded-sm font-medium">Interview</button>
+      <button onclick="toggleStyle('rejected-filter-btn')" id="rejected-filter-btn"
+        class="py-2.5 px-8 bg-white text-[12px] text-[#64748B] rounded-sm font-medium">Rejected</button>
+    </div>
 
 <body>
   
