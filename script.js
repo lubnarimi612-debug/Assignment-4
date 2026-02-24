@@ -75,3 +75,93 @@ function toggleStyle(id) {
   calculateCount();
 
 }
+
+mainContainer.addEventListener('click', function (event) {
+
+  if (event.target.classList.contains('interview-btn')) {
+    const parentNode = event.target.parentNode.parentNode;
+    const cardH = parentNode.querySelector('.card-h').innerText;
+    const cardP = parentNode.querySelector('.card-p').innerText;
+    const jobType = parentNode.querySelector('.job-type').innerText;
+    const notes = parentNode.querySelector('.notes').innerText;
+
+    parentNode.querySelector('.status').innerText = 'INTERVIEW'
+    const cardInfo = {
+      cardH,
+      cardP,
+      jobType,
+      status: 'INTERVIEW',
+      notes
+    }
+
+
+    const interviewExist = interviewList.find(item => item.cardH === cardInfo.cardH);
+    if (!interviewExist) {
+      interviewList.push(cardInfo);
+    }
+
+    rejectedList = rejectedList.filter(item => item.cardH != cardInfo.cardH)
+
+    if (currentStatus === 'rejected-filter-btn') {
+      renderRejected();
+    }
+    // mahine cll
+    calculateCount();
+
+  } else if (event.target.classList.contains('rejected-btn')) {
+    const parentNode = event.target.parentNode.parentNode;
+    const cardH = parentNode.querySelector('.card-h').innerText;
+    const cardP = parentNode.querySelector('.card-p').innerText;
+    const jobType = parentNode.querySelector('.job-type').innerText;
+    const notes = parentNode.querySelector('.notes').innerText;
+    parentNode.querySelector('.status').innerText = 'REJECTED'
+    const cardInfo = {
+      cardH,
+      cardP,
+      jobType,
+      status: 'REJECTED',
+      notes
+    }
+
+
+    const rejectedExist = rejectedList.find(item => item.cardH === cardInfo.cardH);
+    if (!rejectedExist) {
+      rejectedList.push(cardInfo);
+    }
+
+
+    interviewList = interviewList.filter(item => item.cardH != cardInfo.cardH)
+
+    if (currentStatus === 'interview-filter-btn') {
+      renderInterview();
+    }
+    // machine call
+    calculateCount();
+
+  }
+  else if (event.target.closest('#delete-btn')) {
+    const card = event.target.closest('.full-card');
+    if (!card) {
+      return;
+    }
+    const title = card.querySelector('.card-h')?.innerText.trim();
+    if (!title) {
+      return;
+    }
+
+    card.remove();
+
+    interviewList = interviewList.filter(item => item.cardH.trim() !== title);
+    rejectedList = rejectedList.filter(item => item.cardH.trim() !== title);
+
+    if (currentStatus === 'interview-filter-btn') {
+      renderInterview();
+    } else if (currentStatus === 'rejected-filter-btn') {
+      renderRejected();
+    }
+    // machine call
+    calculateCount();
+
+
+  }
+})
