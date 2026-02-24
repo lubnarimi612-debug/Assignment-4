@@ -36,6 +36,21 @@ function calculateCount() {
 
   interviewCount.innerText = interviewList.length;
   rejectedCount.innerText = rejectedList.length;
+
+  // All jobs empty hole No Jobs message dekhabe
+if (allCardSection.children.length === 0) {
+  allCardSection.innerHTML = `
+      <div class="col-span-1 lg:col-span-3 text-center py-16 bg-white rounded-lg border border-[#E5E7EB] mx-auto w-full">
+              <div class="mx-auto flex justify-center mb-6">
+                  <i class="fa-solid fa-file-lines text-8xl text-[#7DA8FF]"></i>
+              </div>
+              <h3 class="text-2xl font-semibold text-[#002C5C] mb-2">No jobs available</h3>
+              <p class="text-[#64748B] text-lg">
+                  Check back soon for new job opportunities
+              </p>
+          </div>
+      `;
+}
 }
 
 // machine call
