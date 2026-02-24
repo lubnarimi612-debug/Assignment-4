@@ -165,3 +165,53 @@ mainContainer.addEventListener('click', function (event) {
 
   }
 })
+
+
+// add interview list rendering and empty state handling
+
+function renderInterview() {
+  filteredSection.innerHTML = '';
+  if (interviewList.length === 0) {
+    filteredSection.innerHTML = `
+        <div class="text-center py-16 bg-white rounded-lg border border-[#E5E7EB] mx-auto">
+                <div class="mx-auto flex justify-center mb-6">
+                    <i class="fa-solid fa-file-lines text-8xl text-[#7DA8FF]"></i>
+                </div>
+                <h3 class="text-2xl font-semibold text-[#002C5C] mb-2">No jobs available</h3>
+                <p class="text-[#64748B] text-lg">
+                    Check back soon for new job opportunities
+                </p>
+            </div>
+        `
+  }
+
+  for (let interview of interviewList) {
+    console.log(interview)
+    let div = document.createElement('div');
+    div.className = 'full-card p-6 bg-white border border-[#F1F2F4] rounded-lg'
+    div.innerHTML = `
+        <div>
+                <div class="flex justify-between">
+                    <div>
+                        <h2 class="text-[#002C5C] font-semibold text-[18px] pb-1 card-h">${interview.cardH}</h2>
+                        <p class="text-[#64748B] card-p">${interview.cardP}</p>
+                    </div>
+                    <button id="delete-btn" class="w-10 h-10 flex items-center justify-center border rounded-full border-[#F1F2F4]"><i class="fa-regular fa-trash-can text-[#64748B]"></i></button>
+                </div>
+                <div class="py-5 text-[#64748B]">
+                    <p class="job-type">${interview.jobType}</p>
+                </div>
+                <div class="mb-5">
+                    <p class="status py-2 px-3 rounded-sm bg-[#EEF4FF] w-[130px] font-medium mb-2">${interview.status}</p>
+                    <p class="notes">${interview.notes}</p>
+                </div>
+                <div class="flex gap-2">
+                    <button class="border border-[#10B981] text-[#10B981] font-semibold rounded-sm px-3 py-2 interview-btn">Interview</button>
+                    <button class="border border-[#EF4444] text-[#EF4444] font-semibold rounded-sm px-3 py-2 rejected-btn">Rejected</button>
+                </div>
+            </div>
+        `
+    filteredSection.appendChild(div);
+  }
+}
+
